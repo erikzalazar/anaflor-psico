@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ana Florencia Kavadlo · Psicóloga Infantil</title>
+  <meta name="description" content="Psicóloga infantil y profesora en Psicología. Acompañando familias en la crianza real. Especializada en niños con desafíos en el desarrollo." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue:    '#196fc5',
+              teal:    '#45aab5',
+              rose:    '#f18a8a',
+              peach:   '#facab5',
+              cream:   '#fdf6ec',
+              sage:    '#97ccb3',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Playfair Display', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+
+    .gradient-hero {
+      background: linear-gradient(160deg, #fdf6ec 0%, #facab5 40%, #f18a8a22 100%);
+    }
+
+    .card-hover {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(25, 111, 197, 0.12);
+    }
+
+    .pill-tag {
+      display: inline-block;
+      background: #45aab522;
+      color: #196fc5;
+      border: 1px solid #45aab560;
+      border-radius: 9999px;
+      padding: 0.25rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* Accordion */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .accordion-content.open {
+      max-height: 600px;
+    }
+    .accordion-icon {
+      transition: transform 0.3s ease;
+    }
+    .accordion-item.open .accordion-icon {
+      transform: rotate(45deg);
+    }
+
+    /* WhatsApp float button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 50;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 22px rgba(37,211,102,0.55);
+    }
+
+    /* Photo circle */
+    .photo-ring {
+      border: 4px solid #facab5;
+      box-shadow: 0 0 0 4px #97ccb360;
+    }
+
+    @media (max-width: 640px) {
+      .hero-text { text-align: center; }
+    }
+  </style>
+</head>
+<body class="bg-brand-cream text-gray-800 font-sans antialiased">
+
+  <!-- ===== HERO ===== -->
+  <section class="gradient-hero min-h-screen flex items-center px-6 py-16">
+    <div class="max-w-4xl mx-auto w-full">
+      <div class="flex flex-col sm:flex-row items-center gap-10">
+
+        <!-- Photo -->
+        <div class="shrink-0">
+          <img
+            src="ana-profile.jpg"
+            alt="Ana Florencia Kavadlo, Psicóloga"
+            class="w-48 h-48 sm:w-56 sm:h-56 rounded-full object-cover photo-ring"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          />
+          <!-- Fallback avatar -->
+          <div style="display:none" class="w-48 h-48 sm:w-56 sm:h-56 rounded-full photo-ring bg-brand-peach items-center justify-center">
+            <span class="text-5xl font-display text-brand-blue">AF</span>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="hero-text">
+          <p class="text-brand-teal font-medium tracking-widest text-xs uppercase mb-2">Psicóloga · Buenos Aires</p>
+          <h1 class="font-display text-4xl sm:text-5xl text-brand-blue leading-tight mb-1">
+            Ana Florencia<br/>Kavadlo
+          </h1>
+          <p class="text-gray-500 text-sm font-light mb-4">Psic. · Lic. en Psicología · Prof. en Psicología · Posgrado Ciencias Cognitivas (Favaloro)</p>
+
+          <p class="text-lg text-gray-700 leading-relaxed mb-6 max-w-xl font-light italic">
+            "Acompañando familias en la crianza real.<br/>
+            Entendé lo que pasa y conectá con tu hijo/a."
+          </p>
+
+          <div class="flex flex-wrap gap-2 justify-center sm:justify-start mb-8">
+            <span class="pill-tag">Psicología Infantil</span>
+            <span class="pill-tag">Crianza y Desarrollo</span>
+            <span class="pill-tag">Terapia Cognitivo-Conductual</span>
+            <span class="pill-tag">Inclusión</span>
+          </div>
+
+          <!-- CTA buttons -->
+          <div class="flex flex-wrap gap-3 justify-center sm:justify-start">
+            <a href="https://wa.me/5491164403384" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-brand-blue hover:bg-[#1560ad] text-white font-medium px-6 py-3 rounded-full transition-colors shadow-md">
+              <!-- WhatsApp icon -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.547a.5.5 0 0 0 .609.61l5.803-1.464A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.686-.516-5.21-1.415l-.374-.22-3.882.979.998-3.78-.24-.388A9.945 9.945 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+              </svg>
+              Escribime por WhatsApp
+            </a>
+            <a href="#sobre-mi"
+               class="inline-flex items-center gap-2 border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white font-medium px-6 py-3 rounded-full transition-colors">
+              Conocé más
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SOBRE MÍ ===== -->
+  <section id="sobre-mi" class="py-20 px-6 bg-white">
+    <div class="max-w-3xl mx-auto">
+      <p class="text-brand-teal font-medium tracking-widest text-xs uppercase mb-2 text-center">Sobre mí</p>
+      <h2 class="font-display text-3xl text-brand-blue text-center mb-10">Un espacio sin juicios, solo acompañamiento</h2>
+
+      <div class="prose prose-lg text-gray-600 leading-relaxed space-y-5 font-light">
+        <p>
+          Soy <strong class="font-medium text-gray-700">Licenciada y Profesora en Psicología</strong>, graduada de la Universidad de Buenos Aires, con formación en terapia cognitivo-conductual y un enfoque centrado en la persona. Me especializo en el tratamiento y coordinación de intervenciones para niños con desafíos en el desarrollo y adultos con distintas discapacidades, con el objetivo de mejorar su calidad de vida y fomentar su autonomía.
+        </p>
+        <p>
+          Soy cofundadora de la Asociación Civil <strong class="font-medium text-gray-700">"Bruco para la Inclusión de Niños y Jóvenes con Discapacidad"</strong>, una organización sin fines de lucro dedicada a promover la integración socio-comunitaria. A través de esta iniciativa, realizamos jornadas de sensibilización, capacitaciones para profesionales y familias, y brindamos orientación gratuita a quienes necesitan apoyo.
+        </p>
+        <p>
+          Trabajo con el compromiso de construir espacios más inclusivos y accesibles, donde cada persona pueda desarrollar su máximo potencial.
+        </p>
+      </div>
+
+      <!-- Credentials grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12">
+        <div class="bg-brand-cream rounded-2xl p-5 border border-brand-peach card-hover">
+          <div class="text-brand-rose text-2xl mb-2" aria-hidden="true">🎓</div>
+          <h3 class="font-semibold text-brand-blue mb-1">Formación Académica</h3>
+          <ul class="text-sm text-gray-600 space-y-1 font-light">
+            <li>Lic. en Psicología · UBA</li>
+            <li>Prof. en Psicología · UBA</li>
+            <li>Posgrado Ciencias Cognitivas · Favaloro</li>
+          </ul>
+        </div>
+        <div class="bg-brand-cream rounded-2xl p-5 border border-brand-peach card-hover">
+          <div class="text-brand-teal text-2xl mb-2" aria-hidden="true">💙</div>
+          <h3 class="font-semibold text-brand-blue mb-1">Especialidades</h3>
+          <ul class="text-sm text-gray-600 space-y-1 font-light">
+            <li>Psicología Infantil y del Desarrollo</li>
+            <li>Crianza y vínculo familiar</li>
+            <li>Terapia Cognitivo-Conductual</li>
+            <li>Inclusión y Discapacidad</li>
+          </ul>
+        </div>
+        <div class="bg-brand-cream rounded-2xl p-5 border border-brand-peach card-hover">
+          <div class="text-brand-sage text-2xl mb-2" aria-hidden="true">🤝</div>
+          <h3 class="font-semibold text-brand-blue mb-1">Asociación Civil</h3>
+          <p class="text-sm text-gray-600 font-light">Cofundadora de <em>Bruco para la Inclusión de Niños y Jóvenes con Discapacidad</em> · Capacitaciones, sensibilización y orientación gratuita.</p>
+        </div>
+        <div class="bg-brand-cream rounded-2xl p-5 border border-brand-peach card-hover">
+          <div class="text-brand-blue text-2xl mb-2" aria-hidden="true">🧠</div>
+          <h3 class="font-semibold text-brand-blue mb-1">Enfoque</h3>
+          <p class="text-sm text-gray-600 font-light">Centrado en la persona, con base en evidencia científica. Sin juicios, sin comparaciones. Un lugar seguro para hablar sin filtros.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PREGUNTAS FRECUENTES ===== -->
+  <section id="preguntas" class="py-20 px-6 bg-brand-cream">
+    <div class="max-w-2xl mx-auto">
+      <p class="text-brand-teal font-medium tracking-widest text-xs uppercase mb-2 text-center">Preguntas frecuentes</p>
+      <h2 class="font-display text-3xl text-brand-blue text-center mb-10">Lo que más me preguntan las familias</h2>
+
+      <div class="space-y-3" id="accordion">
+
+        <div class="accordion-item bg-white rounded-2xl border border-brand-peach overflow-hidden">
+          <button class="accordion-btn w-full flex items-center justify-between px-6 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+                  aria-expanded="false">
+            <span class="font-medium text-gray-800">¿Cuándo consultar por el desarrollo de mi hijo/a?</span>
+            <span class="accordion-icon text-brand-rose text-xl font-light ml-4 shrink-0" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-content px-6">
+            <p class="pb-4 text-gray-600 font-light text-sm leading-relaxed">
+              Tu preocupación no necesita justificación. Si algo en el desarrollo o la rutina de tu hijo/a te inquieta, eso ya es motivo suficiente para buscar respuestas. En el consultorio no juzgamos ni comparamos — acompañamos. La primera consulta es un espacio para conocernos, hablar sin filtros y empezar a armar un camino juntos.
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item bg-white rounded-2xl border border-brand-peach overflow-hidden">
+          <button class="accordion-btn w-full flex items-center justify-between px-6 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+                  aria-expanded="false">
+            <span class="font-medium text-gray-800">Mi hijo/a tiene 10-13 años y siento que ya no lo/la entiendo, ¿es normal?</span>
+            <span class="accordion-icon text-brand-rose text-xl font-light ml-4 shrink-0" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-content px-6">
+            <p class="pb-4 text-gray-600 font-light text-sm leading-relaxed">
+              Es normal, y tiene una explicación. La preadolescencia es una de las etapas más intensas del desarrollo y una de las menos habladas. No son niños, pero tampoco son adolescentes — están en el medio de todo. En esta etapa nuestro rol cambia: menos preguntar, más estar disponibles. Menos buscar respuestas, más ofrecer un lugar seguro al que puedan volver.
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item bg-white rounded-2xl border border-brand-peach overflow-hidden">
+          <button class="accordion-btn w-full flex items-center justify-between px-6 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+                  aria-expanded="false">
+            <span class="font-medium text-gray-800">¿Cómo son las sesiones?</span>
+            <span class="accordion-icon text-brand-rose text-xl font-light ml-4 shrink-0" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-content px-6">
+            <p class="pb-4 text-gray-600 font-light text-sm leading-relaxed">
+              Las sesiones son un espacio confidencial, sin juicios ni comparaciones. Trabajamos desde la terapia cognitivo-conductual con un enfoque centrado en la persona. Dependiendo del caso, puede incluirse trabajo con la familia, orientación a padres, y coordinación con otros profesionales si fuera necesario.
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion-item bg-white rounded-2xl border border-brand-peach overflow-hidden">
+          <button class="accordion-btn w-full flex items-center justify-between px-6 py-4 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue"
+                  aria-expanded="false">
+            <span class="font-medium text-gray-800">¿Atendés de forma presencial u online?</span>
+            <span class="accordion-icon text-brand-rose text-xl font-light ml-4 shrink-0" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-content px-6">
+            <p class="pb-4 text-gray-600 font-light text-sm leading-relaxed">
+              Consultame por WhatsApp para coordinar la modalidad que mejor se adapte a tu situación. Podemos hablar y encontrar la opción más cómoda para vos y tu familia.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACTO ===== -->
+  <section id="contacto" class="py-20 px-6 bg-white">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="text-brand-teal font-medium tracking-widest text-xs uppercase mb-2">Contacto</p>
+      <h2 class="font-display text-3xl text-brand-blue mb-4">¿Querés dar el primer paso?</h2>
+      <p class="text-gray-500 font-light mb-10 text-lg">La primera consulta es solo conocernos. Sin compromisos, sin juicios.</p>
+
+      <a href="https://wa.me/5491164403384" target="_blank" rel="noopener"
+         class="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe5a] text-white font-semibold text-lg px-8 py-4 rounded-full shadow-lg transition-colors mb-12">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.547a.5.5 0 0 0 .609.61l5.803-1.464A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.686-.516-5.21-1.415l-.374-.22-3.882.979.998-3.78-.24-.388A9.945 9.945 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+        Contactar por WhatsApp
+      </a>
+
+      <!-- Social links -->
+      <div class="flex items-center justify-center gap-6">
+
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/anaflor.psico/" target="_blank" rel="noopener"
+           class="flex flex-col items-center gap-1 text-gray-400 hover:text-brand-rose transition-colors group"
+           aria-label="Instagram de Ana Florencia Kavadlo">
+          <span class="w-12 h-12 flex items-center justify-center rounded-full bg-brand-cream group-hover:bg-brand-peach transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </span>
+          <span class="text-xs">Instagram</span>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/licanaflorenciapsicologa/" target="_blank" rel="noopener"
+           class="flex flex-col items-center gap-1 text-gray-400 hover:text-brand-blue transition-colors group"
+           aria-label="LinkedIn de Ana Florencia Kavadlo">
+          <span class="w-12 h-12 flex items-center justify-center rounded-full bg-brand-cream group-hover:bg-[#e8f0fb] transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </span>
+          <span class="text-xs">LinkedIn</span>
+        </a>
+
+        <!-- Facebook -->
+        <a href="https://facebook.com/flor.kavadlo" target="_blank" rel="noopener"
+           class="flex flex-col items-center gap-1 text-gray-400 hover:text-brand-blue transition-colors group"
+           aria-label="Facebook de Ana Florencia Kavadlo">
+          <span class="w-12 h-12 flex items-center justify-center rounded-full bg-brand-cream group-hover:bg-[#e8f0fb] transition-colors">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+          </span>
+          <span class="text-xs">Facebook</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="bg-brand-blue text-white py-8 px-6 text-center">
+    <p class="font-display italic text-lg mb-1">Ana Florencia Kavadlo</p>
+    <p class="text-blue-200 text-sm font-light">Psic. · Lic. en Psicología · Buenos Aires, Argentina</p>
+    <p class="text-blue-300 text-xs mt-4 font-light">© 2025 · Todos los derechos reservados</p>
+  </footer>
+
+  <!-- ===== WHATSAPP FLOATING BUTTON ===== -->
+  <a href="https://wa.me/5491164403384" target="_blank" rel="noopener"
+     class="whatsapp-float"
+     aria-label="Contactar por WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+      <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.547a.5.5 0 0 0 .609.61l5.803-1.464A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.686-.516-5.21-1.415l-.374-.22-3.882.979.998-3.78-.24-.388A9.945 9.945 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+    </svg>
+  </a>
+
+  <!-- ===== JS: Accordion ===== -->
+  <script>
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.accordion-item');
+        const content = item.querySelector('.accordion-content');
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.accordion-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.accordion-content').classList.remove('open');
+          i.querySelector('.accordion-btn').setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked if it was closed
+        if (!isOpen) {
+          item.classList.add('open');
+          content.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
