@@ -546,6 +546,43 @@
     .btn-li   { background: #0A66C2; }
     .btn-fb   { background: #1877F2; }
 
+    /* ── CONTACTO LAYOUT ── */
+    .contacto-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .contacto-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+    .contacto-photo {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top;
+      border: 4px solid var(--peach);
+      box-shadow: 0 0 0 4px rgba(151,204,179,0.4);
+      flex-shrink: 0;
+    }
+    .contacto-quote {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+      border-left: 3px solid var(--peach);
+      padding-left: 1.2rem;
+      text-align: left;
+    }
+
     /* ── FOOTER ── */
     footer {
       background: var(--dark);
@@ -609,12 +646,11 @@
 
       /* Contact */
       #contacto { padding: 2.5rem 1.25rem; }
-      .contacto-inner { display: flex; flex-direction: column; gap: 1.5rem; }
-      .contacto-left { flex-direction: row; align-items: center; gap: 1.2rem; }
-      .contacto-photo { width: 120px; height: 120px; }
-      .contacto-quote { font-size: 0.9rem; }
+      .contacto-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .contacto-left { flex-direction: row; gap: 1.2rem; align-items: center; }
+      .contacto-photo { width: 110px; height: 110px; }
+      .contacto-quote { font-size: 0.88rem; }
       .contacto-right { text-align: center; }
-      .contacto-right > div { flex-direction: column; }
       .btn-li { background: #0547a0; }
 
       /* Buttons — full width, harmonious */
@@ -831,14 +867,13 @@
 
   <!-- CONTACTO -->
   <section id="contacto">
-    <div class="contacto-inner" style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;">
+    <div class="contacto-inner">
 
       <!-- Left: photo + quote -->
-      <div class="contacto-left" style="display:flex; flex-direction:column; align-items:center; gap:2rem;">
+      <div class="contacto-left">
         <img class="contacto-photo" src="ana-profile-2.jpg" alt="Ana Florencia Kavadlo"
-             style="width:220px; height:220px; border-radius:50%; object-fit:cover; object-position:top; border:4px solid var(--peach); box-shadow:0 0 0 4px rgba(151,204,179,0.4);"
              onerror="this.style.display='none';" />
-        <blockquote class="contacto-quote" style="font-family:'Fraunces',serif; font-style:italic; font-weight:300; font-size:1.2rem; color:rgba(255,255,255,0.9); line-height:1.6; border-left:3px solid var(--peach); padding-left:1.2rem; text-align:left;">
+        <blockquote class="contacto-quote">
           "La conexión no se mide por cuánto nos cuentan, sino por cuánto saben que pueden confiar en nosotros."
         </blockquote>
       </div>
