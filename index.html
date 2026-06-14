@@ -114,53 +114,6 @@
       .nav-links { display: none; }
     }
 
-    @media (max-width: 768px) {
-      /* Nav */
-      .nav-burger { display: flex; }
-      nav { padding: 1rem 1.25rem; }
-
-      /* Hero */
-      .hero { grid-template-columns: 1fr; }
-      .hero-right { order: -1; padding: 2.5rem 1.5rem 1.5rem; }
-      .hero-left { padding: 2rem 1.5rem 3rem; }
-      .photo-frame { width: 160px; }
-      .hero-name { font-size: clamp(2.2rem, 10vw, 3.5rem); }
-      .hero-tagline { font-size: 1.05rem; }
-      .hero-title { font-size: 0.78rem; }
-
-      /* Sections */
-      section { padding: 3.5rem 1.25rem; }
-      #tambien { padding: 3rem 1.25rem !important; }
-      #tambien > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
-      .esp-grid { grid-template-columns: 1fr !important; }
-
-      /* Sobre mí */
-      .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-
-      /* Contact */
-      #contacto { padding: 3.5rem 1.25rem !important; }
-      #contacto > div { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
-      #contacto > div > div:first-child { align-items: center; }
-      #contacto blockquote { font-size: 1rem !important; text-align: center !important; }
-      #contacto img { width: 160px !important; height: 160px !important; }
-
-      /* Buttons — full width, harmonious */
-      .btn-social {
-        width: 100%;
-        justify-content: center;
-        font-size: 0.95rem;
-        padding: 0.9rem 1.5rem;
-      }
-      .btn-primary {
-        width: 100%;
-        justify-content: center;
-      }
-      #contacto > div > div:last-child > div { flex-direction: column; }
-
-      /* Footer */
-      footer { flex-direction: column; text-align: center; }
-    }
-
     /* ── HERO ── */
     .hero {
       min-height: 100vh;
@@ -618,6 +571,46 @@
     }
     .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 22px rgba(37,211,102,0.5); }
     .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      /* Nav */
+      .nav-burger { display: flex; }
+      nav { padding: 1rem 1.25rem; }
+
+      /* Hero */
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { order: -1; padding: 2.5rem 1.5rem 1.5rem; }
+      .hero-left { padding: 2rem 1.5rem 3rem; }
+      .photo-frame { width: 160px; }
+      .hero-name { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+      .hero-tagline { font-size: 1.05rem; }
+      .hero-title { font-size: 0.78rem; }
+
+      /* Sections */
+      section { padding: 3.5rem 1.25rem; }
+      #tambien { padding: 3rem 1.25rem !important; }
+      #tambien > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .esp-grid { grid-template-columns: 1fr !important; }
+
+      /* Sobre mí */
+      .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      /* Contact */
+      #contacto { padding: 3.5rem 1.25rem !important; }
+      #contacto > div { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+      #contacto > div > div:first-child { align-items: center; }
+      #contacto blockquote { font-size: 1rem !important; text-align: center !important; }
+      #contacto img { width: 160px !important; height: 160px !important; }
+
+      /* Buttons — full width, harmonious */
+      .btn-social { width: 100%; justify-content: center; font-size: 0.95rem; padding: 0.9rem 1.5rem; }
+      .btn-primary { width: 100%; justify-content: center; }
+      #contacto > div > div:last-child > div { flex-direction: column; }
+
+      /* Footer */
+      footer { flex-direction: column; text-align: center; }
+    }
   </style>
 </head>
 <body>
