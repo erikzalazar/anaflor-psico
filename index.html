@@ -608,16 +608,18 @@
       .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
 
       /* Contact */
-      #contacto { padding: 2.5rem 1.25rem !important; }
+      #contacto { padding: 2.5rem 1.25rem 2.5rem !important; }
       #contacto > div { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
       #contacto > div > div:first-child {
         flex-direction: row !important;
         align-items: center !important;
         gap: 1.2rem !important;
         text-align: left !important;
+        padding-top: 0.5rem;
       }
       #contacto img { width: 90px !important; height: 90px !important; flex-shrink: 0; }
       #contacto blockquote { font-size: 0.85rem !important; text-align: left !important; border-left-width: 2px !important; padding-left: 0.8rem !important; }
+      .btn-li { background: #0547a0 !important; }
 
       /* Buttons — full width, harmonious */
       .btn-social { width: 100%; justify-content: center; font-size: 0.95rem; padding: 0.9rem 1.5rem; }
@@ -625,7 +627,7 @@
       #contacto > div > div:last-child > div { flex-direction: column; }
 
       /* Footer */
-      footer { flex-direction: column; text-align: center; }
+      footer { flex-direction: column; text-align: center; padding: 1.5rem 1.25rem; gap: 0.4rem; }
     }
   </style>
 </head>
@@ -637,6 +639,7 @@
     <ul class="nav-links">
       <li><a href="#sobre-mi">Sobre mí</a></li>
       <li><a href="#especialidades">Especialidades</a></li>
+      <li><a href="#tambien">Más allá</a></li>
       <li><a href="#preguntas">Preguntas</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -648,6 +651,7 @@
   <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
     <a href="#sobre-mi" class="mobile-link">Sobre mí</a>
     <a href="#especialidades" class="mobile-link">Especialidades</a>
+    <a href="#tambien" class="mobile-link">Más allá de la infancia</a>
     <a href="#preguntas" class="mobile-link">Preguntas</a>
     <a href="#contacto" class="mobile-link">Contacto</a>
   </div>
