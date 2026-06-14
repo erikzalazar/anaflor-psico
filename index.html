@@ -64,8 +64,96 @@
     }
     .nav-links a:hover { color: var(--blue); }
 
+    /* ── HAMBURGER (hidden on desktop) ── */
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+    .nav-burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--dark);
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-burger.open span:nth-child(2) { opacity: 0; }
+    .nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 57px; left: 0; right: 0;
+      z-index: 99;
+      background: var(--cream);
+      border-bottom: 1px solid #e8e0d4;
+      flex-direction: column;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-link {
+      display: block;
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--dark);
+      text-decoration: none;
+      border-top: 1px solid #e8e0d4;
+      transition: background 0.15s, color 0.15s;
+    }
+    .mobile-link:hover { background: #f0e8dc; color: var(--blue); }
+
     @media (max-width: 600px) {
       .nav-links { display: none; }
+    }
+
+    @media (max-width: 768px) {
+      /* Nav */
+      .nav-burger { display: flex; }
+
+      /* Hero */
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { order: -1; padding: 2.5rem 1.5rem 1.5rem; }
+      .hero-left { padding: 2rem 1.5rem 3rem; }
+      .photo-frame { width: 160px; }
+
+      /* Sections */
+      section { padding: 3.5rem 1.25rem; }
+      #tambien { padding: 3rem 1.25rem !important; }
+      #tambien > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
+
+      /* Sobre mí */
+      .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+      /* Contact */
+      #contacto { padding: 3.5rem 1.25rem !important; }
+      #contacto > div { grid-template-columns: 1fr !important; gap: 2.5rem !important; }
+      #contacto > div > div:first-child { align-items: center; }
+      #contacto blockquote { font-size: 1rem !important; text-align: center !important; }
+      #contacto img { width: 160px !important; height: 160px !important; }
+
+      /* Buttons — full width, harmonious */
+      .btn-social {
+        width: 100%;
+        justify-content: center;
+        font-size: 0.95rem;
+        padding: 0.9rem 1.5rem;
+      }
+      .btn-primary {
+        width: 100%;
+        justify-content: center;
+      }
+      #contacto > div > div:last-child > div { flex-direction: column; }
+
+      /* Footer */
+      footer { flex-direction: column; text-align: center; }
     }
 
     /* ── HERO ── */
@@ -238,15 +326,6 @@
     .tag-rose  { background: var(--rose);  color: #fff; }
     .tag-sage  { background: var(--sage);  color: var(--dark); }
 
-    @media (max-width: 768px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-      .hero-left { padding: 4rem 2rem 3rem; }
-      .hero-right { padding: 3rem 2rem; }
-      .photo-frame { width: 200px; }
-    }
-
     /* ── SECTION BASE ── */
     section { padding: 6rem 2.5rem; }
 
@@ -332,16 +411,6 @@
       color: var(--dark);
       font-weight: 400;
       line-height: 1.5;
-    }
-
-    @media (max-width: 768px) {
-      .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
-      #tambien > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
-      .photo-break { grid-template-columns: 1fr !important; height: auto !important; }
-      .photo-break img { height: 280px; }
-      .photo-break > div { padding: 2rem !important; }
-      #contacto > div { grid-template-columns: 1fr !important; gap: 3rem !important; text-align: center; }
-      #contacto > div > div:first-child { align-items: center; }
     }
 
     /* ── ESPECIALIDADES ── */
@@ -550,14 +619,24 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">anaflor.psico</a>
+    <a href="#" class="nav-logo">Lic. Ana Flor Kavadlo</a>
     <ul class="nav-links">
       <li><a href="#sobre-mi">Sobre mí</a></li>
       <li><a href="#especialidades">Especialidades</a></li>
       <li><a href="#preguntas">Preguntas</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
+    <button class="nav-burger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <a href="#sobre-mi" class="mobile-link">Sobre mí</a>
+    <a href="#especialidades" class="mobile-link">Especialidades</a>
+    <a href="#preguntas" class="mobile-link">Preguntas</a>
+    <a href="#contacto" class="mobile-link">Contacto</a>
+  </div>
 
   <!-- HERO -->
   <section class="hero" aria-label="Presentación">
@@ -798,7 +877,25 @@
   </a>
 
   <script>
-    document.querySelectorAll('.faq-btn').forEach(btn => {
+    // Hamburger menu
+    const burger = document.querySelector('.nav-burger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    burger.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      burger.classList.toggle('open', isOpen);
+      burger.setAttribute('aria-expanded', isOpen);
+      mobileMenu.setAttribute('aria-hidden', !isOpen);
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      });
+    });
+
+    // FAQ accordion
       btn.addEventListener('click', () => {
         const item = btn.closest('.faq-item');
         const body = item.querySelector('.faq-body');
