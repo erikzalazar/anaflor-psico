@@ -98,8 +98,17 @@
       border-bottom: 2px solid #e8e0d4;
       flex-direction: column;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transform-origin: top;
+      animation: none;
     }
-    .mobile-menu.open { display: flex; }
+    .mobile-menu.open {
+      display: flex;
+      animation: slideDown 0.25s ease forwards;
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
     .mobile-link {
       display: block;
       padding: 1rem 2rem;
@@ -660,12 +669,6 @@
         <img src="ana-profile.jpg" alt="Ana Florencia Kavadlo, Psicóloga"
              onerror="this.style.display='none'; document.getElementById('fallback').style.display='flex';" />
         <div id="fallback" class="photo-fallback" style="display:none">AF</div>
-      </div>
-      <div class="hero-tags">
-        <span class="tag tag-blue">Psicología Infantil</span>
-        <span class="tag tag-teal">Crianza y Desarrollo</span>
-        <span class="tag tag-rose">TCC</span>
-        <span class="tag tag-sage">Inclusión</span>
       </div>
     </div>
   </section>
