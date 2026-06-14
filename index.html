@@ -21,7 +21,7 @@
       --dark:  #1a1a2e;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
 
     body {
       font-family: 'DM Sans', system-ui, sans-serif;
@@ -117,17 +117,22 @@
     @media (max-width: 768px) {
       /* Nav */
       .nav-burger { display: flex; }
+      nav { padding: 1rem 1.25rem; }
 
       /* Hero */
       .hero { grid-template-columns: 1fr; }
       .hero-right { order: -1; padding: 2.5rem 1.5rem 1.5rem; }
       .hero-left { padding: 2rem 1.5rem 3rem; }
       .photo-frame { width: 160px; }
+      .hero-name { font-size: clamp(2.2rem, 10vw, 3.5rem); }
+      .hero-tagline { font-size: 1.05rem; }
+      .hero-title { font-size: 0.78rem; }
 
       /* Sections */
       section { padding: 3.5rem 1.25rem; }
       #tambien { padding: 3rem 1.25rem !important; }
       #tambien > div { grid-template-columns: 1fr !important; gap: 2rem !important; }
+      .esp-grid { grid-template-columns: 1fr !important; }
 
       /* Sobre mí */
       .sobre-grid { grid-template-columns: 1fr; gap: 2.5rem; }
