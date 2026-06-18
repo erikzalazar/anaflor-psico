@@ -553,6 +553,23 @@
     .btn-ig   { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
     .btn-li   { background: #0A66C2; }
     .btn-fb   { background: #1877F2; }
+    .btn-email { background: var(--teal); }
+    .contacto-btns-tertiary {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      margin-top: 0.7rem;
+    }
+    @media (min-width: 769px) {
+      .contacto-btns-tertiary { flex-direction: row; flex-wrap: wrap; margin-top: 0; }
+    }
+    .footer-email {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-email:hover { color: #fff; }
 
     /* ── TAMBIEN INNER ── */
     .tambien-inner {
@@ -710,7 +727,8 @@
       #contacto > div > div:last-child > div { flex-direction: column; }
 
       /* Footer */
-      footer { flex-direction: column; text-align: center; padding: 1.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom)); gap: 0.4rem; }
+      footer { flex-direction: column; text-align: center; padding: 1.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom)); gap: 0.3rem; }
+      .btn-email { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -954,6 +972,12 @@
             Facebook
           </a>
         </div>
+        <div class="contacto-btns-tertiary">
+          <a href="mailto:info@anaflorkavadlo.ar" class="btn-social btn-email">
+            <svg fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            info@anaflorkavadlo.ar
+          </a>
+        </div>
       </div>
 
     </div>
@@ -962,6 +986,7 @@
   <!-- FOOTER -->
   <footer>
     <span class="footer-name">Ana Florencia Kavadlo</span>
+    <a href="mailto:info@anaflorkavadlo.ar" class="footer-email">info@anaflorkavadlo.ar</a>
     <span class="footer-copy">© 2026 · Devoto & Ramos Mejía, Buenos Aires</span>
   </footer>
 
