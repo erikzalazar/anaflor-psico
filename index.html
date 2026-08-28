@@ -733,6 +733,12 @@
       gap: 5rem;
       align-items: center;
     }
+    .turnos-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 0.5rem;
+    }
     .btn-secondary {
       display: inline-flex;
       align-items: center;
@@ -756,7 +762,16 @@
     }
     @media (max-width: 768px) {
       .turnos-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .btn-secondary { width: 100%; justify-content: center; }
+      #turnos { padding-bottom: calc(3.5rem + env(safe-area-inset-bottom, 1.5rem)); }
+      .turnos-btns { flex-wrap: nowrap; gap: 0.6rem; }
+      .turnos-btns .btn-primary,
+      .turnos-btns .btn-secondary {
+        flex: 1;
+        width: auto;
+        font-size: 0.78rem;
+        padding: 0.7rem 0.75rem;
+        justify-content: center;
+      }
     }
   </style>
   <script defer src="/_vercel/insights/script.js"></script>
@@ -928,7 +943,7 @@
         <p style="font-size:1rem;line-height:1.8;color:#555;font-weight:300;margin-bottom:2rem;">
           Agendá una videollamada por Google Meet en pocos clicks — sin compromisos, sin juicios. Elegí el día y el horario que mejor te quede.
         </p>
-        <div style="display:flex;flex-wrap:wrap;gap:0.9rem;margin-top:0.5rem;">
+        <div class="turnos-btns">
           <button type="button" class="btn-primary"
             onclick="Calendly.initPopupWidget({url:'https://calendly.com/anaflorkavadlo-info/primer-consulta?background_color=fdf6ec&text_color=1a1a2e&primary_color=196fc5&locale=es-419'});return false;">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
