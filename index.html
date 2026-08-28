@@ -684,6 +684,8 @@
     }
     .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 22px rgba(37,211,102,0.5); }
     .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+    .wa-float { transition: transform 0.2s, box-shadow 0.2s, opacity 0.4s; }
+    .wa-float.wa-hidden { opacity: 0; pointer-events: none; }
 
     /* ── MOBILE ── */
     @media (max-width: 768px) {
@@ -1132,6 +1134,22 @@
         }
       });
     });
+
+    // Hide WhatsApp button when Contacto section is visible
+    var waBtn = document.querySelector('.wa-float');
+    var contactoSection = document.getElementById('contacto');
+    if (waBtn && contactoSection) {
+      var waObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            waBtn.classList.add('wa-hidden');
+          } else {
+            waBtn.classList.remove('wa-hidden');
+          }
+        });
+      }, { threshold: 0.1 });
+      waObserver.observe(contactoSection);
+    }
 
     }); // end DOMContentLoaded
   </script>
