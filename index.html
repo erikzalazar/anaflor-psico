@@ -1115,6 +1115,12 @@
       });
     });
 
+    document.querySelector('.nav-logo').addEventListener('click', function() {
+      mobileMenu.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+
     // FAQ accordion
     document.querySelectorAll('.faq-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
