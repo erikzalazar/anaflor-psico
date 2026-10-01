@@ -842,7 +842,16 @@
     @media (max-width: 768px) {
       .biblioteca-modal { max-height: 85vh; top: 52%; }
       .bib-item { flex-wrap: wrap; }
-      .bib-btn { margin-top: 0.25rem; }
+      .bib-item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto;
+        gap: 0.3rem 1rem;
+        align-items: center;
+      }
+      .bib-icon { grid-row: 1 / 3; align-self: center; }
+      .bib-info { grid-column: 2; grid-row: 1; }
+      .bib-btn  { grid-column: 2; grid-row: 2; width: fit-content; margin-top: 0; }
     }
   </style>
   <script defer src="/_vercel/insights/script.js"></script>
