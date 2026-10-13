@@ -854,6 +854,96 @@
       .bib-btn  { grid-column: 2; grid-row: 2; width: fit-content; margin-top: 0; }
     }
   </style>
+  </style>
+
+  <style>
+    /* ── CONTACT FORM ── */
+    .btn-contacto-form {
+      display: inline-flex; align-items: center; gap: 0.7rem;
+      background: var(--cream); color: var(--dark);
+      font-weight: 500; font-size: 0.85rem;
+      padding: 0.75rem 1.5rem; border-radius: 4px;
+      border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: filter 0.2s, transform 0.2s;
+      width: fit-content;
+    }
+    .btn-contacto-form:hover { filter: brightness(0.95); transform: translateY(-2px); }
+    .contacto-form-backdrop {
+      display: none; position: fixed; inset: 0;
+      background: rgba(26,26,46,0.45); z-index: 400;
+      backdrop-filter: blur(2px);
+    }
+    .contacto-form-modal {
+      display: none; position: fixed;
+      top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.96);
+      z-index: 401; background: var(--cream); border-radius: 12px;
+      width: min(560px, 92vw); max-height: 85vh;
+      overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      opacity: 0;
+    }
+    .contacto-form-backdrop.open { display: block; animation: bibFadeIn 0.2s ease forwards; }
+    .contacto-form-modal.open    { display: block; animation: bibModalIn 0.2s ease forwards; }
+    .contacto-form-header {
+      position: sticky; top: 0; background: var(--cream);
+      padding: 1.5rem 1.75rem 1rem; border-bottom: 1px solid #e8e0d4;
+    }
+    .contacto-form-title {
+      font-family: 'Fraunces', serif; font-weight: 700;
+      font-size: 1.6rem; color: var(--dark); margin-top: 0.25rem;
+    }
+    .contacto-form-close {
+      position: absolute; top: 1rem; right: 1.25rem;
+      background: none; border: none; cursor: pointer;
+      font-size: 1.1rem; color: var(--dark); opacity: 0.5;
+      transition: opacity 0.15s; line-height: 1;
+    }
+    .contacto-form-close:hover { opacity: 1; }
+    .contacto-form-body { padding: 1.25rem 1.75rem 1.75rem; display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .form-label { font-size: 0.8rem; font-weight: 500; color: var(--dark); letter-spacing: 0.03em; }
+    .form-label span { color: #aaa; font-weight: 400; margin-left: 0.3rem; }
+    .form-input, .form-select, .form-textarea {
+      width: 100%; padding: 0.7rem 0.9rem;
+      background: #fff; border: 1.5px solid #e0d8cc;
+      border-radius: 6px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; color: var(--dark);
+      transition: border-color 0.15s; outline: none;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--blue); }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.5rem;
+    }
+    .form-submit {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+      background: var(--peach); color: var(--dark);
+      font-weight: 500; font-size: 0.9rem; padding: 0.85rem 1.8rem;
+      border-radius: 4px; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s, transform 0.2s; width: 100%;
+    }
+    .form-submit:hover { background: var(--rose); color: #fff; transform: translateY(-1px); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .form-success {
+      text-align: center; padding: 2rem 1rem;
+      display: none; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .form-success.visible { display: flex; }
+    .form-success-icon { font-size: 2.5rem; }
+    .form-success p { font-size: 1rem; color: var(--dark); line-height: 1.6; }
+    .form-error {
+      font-size: 0.8rem; color: #c0392b;
+      padding: 0.6rem 0.9rem; background: #fdf0ee;
+      border-radius: 6px; border: 1px solid #f0c0bb; display: none;
+    }
+    .form-error.visible { display: block; }
+    @media (max-width: 768px) {
+      .btn-contacto-form { width: 100%; justify-content: center; font-size: 0.95rem; padding: 0.9rem 1.5rem; }
+    }
+  </style>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -1124,6 +1214,10 @@
         <h2 class="section-title contacto-heading">¿Querés dar<br/><em>el primer paso?</em></h2>
         <p class="contacto-sub">La primera consulta es solo conocernos. Sin compromisos, sin juicios.</p>
         <div class="contacto-btns">
+          <button class="btn-contacto-form" onclick="openContactoForm()">
+            <svg fill="currentColor" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Enviar un mensaje
+          </button>
           <a href="https://wa.me/5491164403384" target="_blank" rel="noopener" class="btn-social btn-wa">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.859L.057 23.547a.5.5 0 0 0 .609.61l5.803-1.464A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.686-.516-5.21-1.415l-.374-.22-3.882.979.998-3.78-.24-.388A9.945 9.945 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
             WhatsApp
@@ -1267,8 +1361,58 @@
       document.getElementById('biblioteca-modal').classList.remove('open');
       document.body.style.overflow = '';
     }
+    function openContactoForm() {
+      document.getElementById('contacto-form-backdrop').classList.add('open');
+      document.getElementById('contacto-form-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      var mobileMenu = document.getElementById('mobile-menu');
+      var burger = document.querySelector('.nav-burger');
+      mobileMenu.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+    function closeContactoForm() {
+      document.getElementById('contacto-form-backdrop').classList.remove('open');
+      document.getElementById('contacto-form-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('contacto-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('cf-submit');
+      var err = document.getElementById('cf-error');
+      err.classList.remove('visible');
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+      var data = {
+        nombre: document.getElementById('cf-nombre').value,
+        email:  document.getElementById('cf-email').value,
+        motivo: document.getElementById('cf-motivo').value,
+        mensaje: document.getElementById('cf-mensaje').value
+      };
+      fetch('https://formspree.io/f/PLACEHOLDER_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(result) {
+        if (result.ok) {
+          document.getElementById('contacto-form').style.display = 'none';
+          document.getElementById('cf-success').classList.add('visible');
+        } else {
+          err.classList.add('visible');
+          btn.disabled = false;
+          btn.textContent = 'Enviar consulta';
+        }
+      })
+      .catch(function() {
+        err.classList.add('visible');
+        btn.disabled = false;
+        btn.textContent = 'Enviar consulta';
+      });
+    });
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeBiblioteca();
+      if (e.key === 'Escape') { closeBiblioteca(); closeContactoForm(); }
     });
   </script>
   <!-- BIBLIOTECA MODAL -->
@@ -1301,6 +1445,49 @@
         </div>
         <a href="https://drive.google.com/file/d/1qKt_XtX3vkJRl_wqRwUctozMXXlcKMUA/view?usp=sharing" class="btn-secondary bib-btn" target="_blank" rel="noopener">Ver PDF</a>
       </div>
+    </div>
+  </div>
+  <!-- CONTACT FORM MODAL -->
+  <div id="contacto-form-backdrop" class="contacto-form-backdrop" onclick="closeContactoForm()"></div>
+  <div id="contacto-form-modal" class="contacto-form-modal" role="dialog" aria-modal="true" aria-label="Formulario de contacto">
+    <div class="contacto-form-header">
+      <span class="section-label">Contacto</span>
+      <h2 class="contacto-form-title">Escribime</h2>
+      <button class="contacto-form-close" onclick="closeContactoForm()" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="contacto-form-body">
+      <div id="cf-success" class="form-success">
+        <div class="form-success-icon">✉️</div>
+        <p>¡Gracias por escribir!<br/>Ana se pondrá en contacto a la brevedad.</p>
+      </div>
+      <form id="contacto-form" novalidate>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div class="form-group">
+            <label class="form-label" for="cf-nombre">Nombre</label>
+            <input id="cf-nombre" name="nombre" type="text" class="form-input" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" class="form-input" placeholder="tu@email.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-motivo">Motivo <span>(opcional)</span></label>
+            <select id="cf-motivo" name="motivo" class="form-select">
+              <option value="">Seleccioná una opción</option>
+              <option value="Consulta sobre mis hijos/as">Consulta sobre mis hijos/as</option>
+              <option value="Consulta para mí">Consulta para mí</option>
+              <option value="Discapacidad e inclusión">Discapacidad e inclusión</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cf-mensaje">Mensaje <span>(opcional)</span></label>
+            <textarea id="cf-mensaje" name="mensaje" class="form-textarea" placeholder="Contame brevemente en qué puedo ayudarte..."></textarea>
+          </div>
+          <div id="cf-error" class="form-error">Hubo un problema al enviar. Intentá de nuevo o escribinos por WhatsApp.</div>
+          <button type="submit" class="form-submit" id="cf-submit">Enviar consulta</button>
+        </div>
+      </form>
     </div>
   </div>
 
