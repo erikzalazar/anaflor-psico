@@ -1337,48 +1337,11 @@
       });
     });
 
-    }); // end DOMContentLoaded
-
-    function openBiblioteca() {
-      document.getElementById('biblioteca-backdrop').classList.add('open');
-      document.getElementById('biblioteca-modal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-      var mobileMenu = document.getElementById('mobile-menu');
-      var burger = document.querySelector('.nav-burger');
-      mobileMenu.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    }
-    function closeBiblioteca() {
-      document.getElementById('biblioteca-backdrop').classList.remove('open');
-      document.getElementById('biblioteca-modal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-    function openContactoForm() {
-      document.getElementById('contacto-form-backdrop').classList.add('open');
-      document.getElementById('contacto-form-modal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-      var mobileMenu = document.getElementById('mobile-menu');
-      var burger = document.querySelector('.nav-burger');
-      mobileMenu.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    }
-    function closeContactoForm() {
-      document.getElementById('contacto-form-backdrop').classList.remove('open');
-      document.getElementById('contacto-form-modal').classList.remove('open');
-      document.body.style.overflow = '';
-      var form = document.getElementById('contacto-form');
-      var successEl = document.querySelector('[data-fs-success]');
-      var errorEl   = document.querySelector('[data-fs-error]');
-      if (form)      { form.style.display = ''; form.reset(); }
-      if (successEl) { successEl.style.display = 'none'; }
-      if (errorEl)   { errorEl.style.display = 'none'; }
-    }
+    // Contact form submit — inside DOMContentLoaded so the form exists in DOM
     document.getElementById('contacto-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      var form   = document.getElementById('contacto-form');
-      var btn    = form.querySelector('[data-fs-submit-btn]');
+      var form      = document.getElementById('contacto-form');
+      var btn       = form.querySelector('[data-fs-submit-btn]');
       var successEl = document.querySelector('[data-fs-success]');
       var errorEl   = document.querySelector('[data-fs-error]');
       errorEl.style.display = 'none';
@@ -1408,6 +1371,58 @@
         btn.textContent = 'Enviar consulta';
       });
     });
+
+    }); // end DOMContentLoaded
+
+    var _savedScroll = 0;
+
+    function _lockScroll() {
+      _savedScroll = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = '-' + _savedScroll + 'px';
+      document.body.style.width = '100%';
+    }
+    function _unlockScroll() {
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.width = '';
+      window.scrollTo(0, _savedScroll);
+    }
+    function _closeMobileMenu() {
+      var mobileMenu = document.getElementById('mobile-menu');
+      var burger = document.querySelector('.nav-burger');
+      mobileMenu.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+    function openBiblioteca() {
+      _lockScroll();
+      document.getElementById('biblioteca-backdrop').classList.add('open');
+      document.getElementById('biblioteca-modal').classList.add('open');
+      _closeMobileMenu();
+    }
+    function closeBiblioteca() {
+      document.getElementById('biblioteca-backdrop').classList.remove('open');
+      document.getElementById('biblioteca-modal').classList.remove('open');
+      _unlockScroll();
+    }
+    function openContactoForm() {
+      _lockScroll();
+      document.getElementById('contacto-form-backdrop').classList.add('open');
+      document.getElementById('contacto-form-modal').classList.add('open');
+      _closeMobileMenu();
+    }
+    function closeContactoForm() {
+      document.getElementById('contacto-form-backdrop').classList.remove('open');
+      document.getElementById('contacto-form-modal').classList.remove('open');
+      _unlockScroll();
+      var form      = document.getElementById('contacto-form');
+      var successEl = document.querySelector('[data-fs-success]');
+      var errorEl   = document.querySelector('[data-fs-error]');
+      if (form)      { form.style.display = ''; form.reset(); }
+      if (successEl) { successEl.style.display = 'none'; }
+      if (errorEl)   { errorEl.style.display = 'none'; }
+    }
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') { closeBiblioteca(); closeContactoForm(); }
     });
