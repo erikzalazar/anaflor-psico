@@ -929,17 +929,15 @@
     .form-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
     .form-success {
       text-align: center; padding: 2rem 1rem;
-      display: none; flex-direction: column; align-items: center; gap: 1rem;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
     }
-    .form-success.visible { display: flex; }
     .form-success-icon { font-size: 2.5rem; }
     .form-success p { font-size: 1rem; color: var(--dark); line-height: 1.6; }
     .form-error {
       font-size: 0.8rem; color: #c0392b;
       padding: 0.6rem 0.9rem; background: #fdf0ee;
-      border-radius: 6px; border: 1px solid #f0c0bb; display: none;
+      border-radius: 6px; border: 1px solid #f0c0bb;
     }
-    .form-error.visible { display: block; }
     @media (max-width: 768px) {
       .btn-contacto-form { width: 100%; justify-content: center; font-size: 0.95rem; padding: 0.9rem 1.5rem; }
     }
@@ -1370,42 +1368,13 @@
       document.getElementById('contacto-form-backdrop').classList.remove('open');
       document.getElementById('contacto-form-modal').classList.remove('open');
       document.body.style.overflow = '';
+      var form = document.getElementById('contacto-form');
+      var successEl = document.querySelector('[data-fs-success]');
+      var errorEl = document.querySelector('[data-fs-error]');
+      if (form) { form.style.display = ''; form.reset(); }
+      if (successEl) { successEl.style.display = 'none'; }
+      if (errorEl)   { errorEl.style.display = 'none'; }
     }
-    document.getElementById('contacto-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      var btn = document.getElementById('cf-submit');
-      var err = document.getElementById('cf-error');
-      err.classList.remove('visible');
-      btn.disabled = true;
-      btn.textContent = 'Enviando...';
-      var data = {
-        nombre: document.getElementById('cf-nombre').value,
-        email:  document.getElementById('cf-email').value,
-        motivo: document.getElementById('cf-motivo').value,
-        mensaje: document.getElementById('cf-mensaje').value
-      };
-      fetch('https://formspree.io/f/mvkzwrjz', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(result) {
-        if (result.ok) {
-          document.getElementById('contacto-form').style.display = 'none';
-          document.getElementById('cf-success').classList.add('visible');
-        } else {
-          err.classList.add('visible');
-          btn.disabled = false;
-          btn.textContent = 'Enviar consulta';
-        }
-      })
-      .catch(function() {
-        err.classList.add('visible');
-        btn.disabled = false;
-        btn.textContent = 'Enviar consulta';
-      });
-    });
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') { closeBiblioteca(); closeContactoForm(); }
     });
@@ -1451,23 +1420,24 @@
       <button class="contacto-form-close" onclick="closeContactoForm()" aria-label="Cerrar">✕</button>
     </div>
     <div class="contacto-form-body">
-      <div id="cf-success" class="form-success">
+      <div data-fs-success class="form-success" style="display:none">
         <div class="form-success-icon">✉️</div>
         <p>¡Gracias por escribir!<br/>Ana se pondrá en contacto a la brevedad.</p>
       </div>
+      <div data-fs-error class="form-error" style="display:none"></div>
       <form id="contacto-form" novalidate>
         <div style="display:flex;flex-direction:column;gap:1rem;">
           <div class="form-group">
             <label class="form-label" for="cf-nombre">Nombre</label>
-            <input id="cf-nombre" name="nombre" type="text" class="form-input" placeholder="Tu nombre" required />
+            <input id="cf-nombre" name="nombre" type="text" class="form-input" placeholder="Tu nombre" required data-fs-field />
           </div>
           <div class="form-group">
             <label class="form-label" for="cf-email">Email</label>
-            <input id="cf-email" name="email" type="email" class="form-input" placeholder="tu@email.com" required />
+            <input id="cf-email" name="email" type="email" class="form-input" placeholder="tu@email.com" required data-fs-field />
           </div>
           <div class="form-group">
             <label class="form-label" for="cf-motivo">Motivo <span>(opcional)</span></label>
-            <select id="cf-motivo" name="motivo" class="form-select">
+            <select id="cf-motivo" name="motivo" class="form-select" data-fs-field>
               <option value="">Seleccioná una opción</option>
               <option value="Consulta sobre mis hijos/as">Consulta sobre mis hijos/as</option>
               <option value="Consulta para mí">Consulta para mí</option>
@@ -1477,14 +1447,18 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="cf-mensaje">Mensaje</label>
-            <textarea id="cf-mensaje" name="mensaje" class="form-textarea" placeholder="Contame brevemente en qué puedo ayudarte..." required></textarea>
+            <textarea id="cf-mensaje" name="mensaje" class="form-textarea" placeholder="Contame brevemente en qué puedo ayudarte..." required data-fs-field></textarea>
           </div>
-          <div id="cf-error" class="form-error">Hubo un problema al enviar. Intentá de nuevo o escribinos por WhatsApp.</div>
-          <button type="submit" class="form-submit" id="cf-submit">Enviar consulta</button>
+          <button type="submit" data-fs-submit-btn class="form-submit">Enviar consulta</button>
         </div>
       </form>
     </div>
   </div>
+  <script>
+    window.formspree = window.formspree || function() { (formspree.q = formspree.q || []).push(arguments); };
+    formspree('initForm', { formElement: '#contacto-form', formId: 'mvkzwrjz' });
+  </script>
+  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 </body>
 </html>
