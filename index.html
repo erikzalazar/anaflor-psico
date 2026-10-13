@@ -1370,11 +1370,44 @@
       document.body.style.overflow = '';
       var form = document.getElementById('contacto-form');
       var successEl = document.querySelector('[data-fs-success]');
-      var errorEl = document.querySelector('[data-fs-error]');
-      if (form) { form.style.display = ''; form.reset(); }
+      var errorEl   = document.querySelector('[data-fs-error]');
+      if (form)      { form.style.display = ''; form.reset(); }
       if (successEl) { successEl.style.display = 'none'; }
       if (errorEl)   { errorEl.style.display = 'none'; }
     }
+    document.getElementById('contacto-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var form   = document.getElementById('contacto-form');
+      var btn    = form.querySelector('[data-fs-submit-btn]');
+      var successEl = document.querySelector('[data-fs-success]');
+      var errorEl   = document.querySelector('[data-fs-error]');
+      errorEl.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Enviando...';
+      fetch('https://formspree.io/f/mvkzwrjz', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.ok) {
+          form.style.display = 'none';
+          successEl.style.display = 'flex';
+        } else {
+          errorEl.textContent = (data.errors || []).map(function(x){ return x.message; }).join(', ') || 'Hubo un problema al enviar. Intentá de nuevo.';
+          errorEl.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Enviar consulta';
+        }
+      })
+      .catch(function() {
+        errorEl.textContent = 'Hubo un problema al enviar. Intentá de nuevo o escribinos por WhatsApp.';
+        errorEl.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Enviar consulta';
+      });
+    });
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') { closeBiblioteca(); closeContactoForm(); }
     });
@@ -1454,11 +1487,6 @@
       </form>
     </div>
   </div>
-  <script>
-    window.formspree = window.formspree || function() { (formspree.q = formspree.q || []).push(arguments); };
-    formspree('initForm', { formElement: '#contacto-form', formId: 'mvkzwrjz' });
-  </script>
-  <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
 </body>
 </html>
