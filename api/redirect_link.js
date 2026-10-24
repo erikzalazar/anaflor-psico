@@ -1,21 +1,19 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const fs = require('fs');
+const path = require('path');
 
 const redirectsPath = path.join(__dirname, '../redirects.json');
 
 function getReferer(req) {
-  return req.headers.referer?.includes('anaflorkavadlo.ar') ? 'internal' : (req.headers.referer || 'direct');
+  const referer = req.headers.referer || '';
+  return referer.includes('anaflorkavadlo.ar') ? 'internal' : (referer || 'direct');
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const { slug } = req.query;
 
   if (!slug) {
-    return res.status(400).html('<h1>400 — Missing slug</h1>');
+    res.status(400).setHeader('Content-Type', 'text/html');
+    return res.end('<h1>400 — Missing slug</h1>');
   }
 
   let redirects;
@@ -23,12 +21,14 @@ export default async function handler(req, res) {
     const content = fs.readFileSync(redirectsPath, 'utf-8');
     redirects = JSON.parse(content);
   } catch (err) {
-    return res.status(500).html('<h1>500 — Server error</h1>');
+    res.status(500).setHeader('Content-Type', 'text/html');
+    return res.end('<h1>500 — Server error</h1>');
   }
 
   const target = redirects[slug];
   if (!target) {
-    return res.status(404).html(`
+    res.status(404).setHeader('Content-Type', 'text/html');
+    return res.end(`
       <!DOCTYPE html>
       <html>
       <head>
@@ -69,4 +69,5 @@ export default async function handler(req, res) {
 
   res.setHeader('Location', target.url);
   res.status(302).end();
-}
+};
+
