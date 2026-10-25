@@ -553,8 +553,9 @@
       padding: 1rem 2rem;
       border-radius: 4px;
       text-decoration: none;
-      transition: filter 0.2s, transform 0.2s;
+      transition: filter 0.2s, transform 0.2s, box-shadow 0.2s;
       color: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
     }
     .btn-social:hover { filter: brightness(1.1); transform: translateY(-2px); }
     .btn-social svg { width: 20px; height: 20px; flex-shrink: 0; }
@@ -644,6 +645,10 @@
     .contacto-btns-group > button {
       width: 100%;
       justify-content: center;
+    }
+    .contacto-btns-group:first-child > a,
+    .contacto-btns-group:first-child > button {
+      justify-content: flex-start;
     }
     @media (min-width: 769px) {
       .contacto-btns { flex-direction: row; flex-wrap: wrap; }
