@@ -656,6 +656,14 @@
     }
     @media (max-width: 768px) {
       .contacto-btns { grid-template-columns: 1fr; }
+      .contacto-btns-group:last-child {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+      }
+      .contacto-btns-group:last-child > a {
+        justify-content: center;
+      }
     }
     /* Desktop: two columns side by side */
     @media (min-width: 769px) {
