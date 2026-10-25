@@ -545,8 +545,9 @@
       margin-bottom: 3rem;
     }
     .btn-social {
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.7rem;
       font-weight: 500;
       font-size: 1rem;
@@ -557,9 +558,11 @@
       color: #fff;
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       border: 1px solid rgba(255,255,255,0.2);
+      width: 100%;
     }
     .btn-social:hover { filter: brightness(1.1); transform: translateY(-2px); }
-    .btn-social svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .btn-social svg { width: 20px; height: 20px; flex-shrink: 0; display: block; }
+    .btn-contacto-form svg { width: 20px; height: 20px; flex-shrink: 0; display: block; }
     .btn-wa   { background: #25D366; }
     .btn-ig   { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
     .btn-li   { background: #0547a0; }
@@ -875,13 +878,18 @@
   <style>
     /* ── CONTACT FORM ── */
     .btn-contacto-form {
-      display: inline-flex; align-items: center; gap: 0.7rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.7rem;
       background: var(--cream); color: var(--dark);
       font-weight: 500; font-size: 1rem;
       padding: 1rem 1.5rem; border-radius: 4px;
       border: none; cursor: pointer;
       font-family: 'DM Sans', sans-serif;
       transition: filter 0.2s, transform 0.2s;
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      font: inherit;
+      line-height: 1.5;
     }
     .btn-contacto-form:hover { filter: brightness(0.95); transform: translateY(-2px); }
     .contacto-form-backdrop {
