@@ -1,4 +1,5 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/r/:slug", "destination": "/api/redirect_link?slug=:slug" }
   ]
