@@ -55,6 +55,17 @@
       font-size: 1.1rem;
       color: var(--blue);
       text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.05rem;
+    }
+    .nav-mn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 400;
+      color: var(--dark);
+      opacity: 0.5;
+      letter-spacing: 0.04em;
     }
     .nav-links {
       display: flex;
@@ -700,6 +711,12 @@
       font-size: 0.75rem;
       color: rgba(255,255,255,0.35);
     }
+    .footer-link {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-link:hover { color: rgba(255,255,255,0.7); }
 
     /* ── WHATSAPP FLOAT ── */
     .wa-float {
@@ -978,7 +995,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#" class="nav-logo">Lic. Ana Flor Kavadlo</a>
+    <a href="#" class="nav-logo">Lic. Ana Flor Kavadlo<span class="nav-mn">MN 55584</span></a>
     <ul class="nav-links">
       <li><a href="#sobre-mi">Sobre mí</a></li>
       <li><a href="#especialidades">Especialidades</a></li>
@@ -1276,6 +1293,7 @@
   <!-- FOOTER -->
   <footer>
     <span class="footer-copy">© 2026 · Devoto, Ciudad de Buenos Aires</span>
+    <span class="footer-copy">MN 55584 · <a href="/privacidad" class="footer-link">Política de privacidad</a></span>
   </footer>
 
   <!-- WHATSAPP FLOAT -->
